@@ -1,0 +1,5 @@
+<div class="ui container">
+      <div class="ui divided items" *ngIf="articles && articles.length">
+        <app-article class='item'  *ngFor="let article of articles" [article]="article" ></app-article>
+      </div>
+</div>
