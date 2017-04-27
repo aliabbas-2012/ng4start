@@ -11,14 +11,14 @@ class Article {
   template: `
     <div>
       <h2>{{article.title}}</h2>
-      <p>{{article.discription}}</p>
+      <p>{{article.description}}</p>
     </div>
   `
 })
 
 
 export class ArticleComponent {
-  @Input() article: Object;
+  @Input() article: Article;
 }
 
 //another component namely sidebar
@@ -51,24 +51,15 @@ export class SideBarComponent {
 })
 export class AppComponent {
   title = 'Article View application!';
-  articles: Object[];
+  articles: Article[];
   
   constructor(){
-    this.articles = [{
-      title: 'Erlang development',
-      discription: 'Erlang is fastest in network communication'
-    },
-    {
-      title: 'Elixir development',
-      discription: 'Elixer is written as wrapper over erlang'
-    },
-    {
-      title: 'Phoenix development',
-      discription: 'Phoenix is framework of angular'
-    },
-    {
-      title: 'Angular JS development',
-      discription: 'Dynamic web development'
-    }]
+    this.articles = [
+      //defining instances in array objects
+      new Article('Erlang development','Erlang is fastest in network communication') ,
+      new Article('Elixir development','Elixer is written as wrapper over erlang') ,
+      new Article('Phoenix development','Phoenix is framework of angular') ,
+      new Article('Angular JS development','Dynamic web development') ,
+   ]
   }
 }
