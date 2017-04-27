@@ -1,5 +1,15 @@
 import { Component,Input } from '@angular/core';
 
+class Article {
+  public title:string;
+  public description:string;
+  
+  constructor(_title:string,_description:string){
+    this.title = _title;
+    this.description = _description;
+  }
+}
+
 //article component
 @Component({
   selector: 'app-article',
@@ -10,6 +20,7 @@ import { Component,Input } from '@angular/core';
     </div>
   `
 })
+
 
 export class ArticleComponent {
   @Input() article: Object;
