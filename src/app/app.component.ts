@@ -1,13 +1,8 @@
 import { Component,Input } from '@angular/core';
 
-class Article {
-  public title:string;
-  public description:string;
-  
-  constructor(_title:string,_description:string){
-    this.title = _title;
-    this.description = _description;
-  }
+class Article {  
+  //no need to define like javastyle , Typescript will handle
+  constructor(public title: string,public description: string){}
 }
 
 //article component
