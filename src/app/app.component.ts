@@ -1,5 +1,6 @@
 import { Component,Input } from '@angular/core';
 import {Article} from './article'
+import {ArticleService} from './services/article.service'
 
 @Component({
   selector: 'app-root',
@@ -7,16 +8,12 @@ import {Article} from './article'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+ 
+
   title = 'Article View application!';
   articles: Article[];
   
-  constructor(){
-    this.articles = [
-      //defining instances in array objects
-      new Article('Erlang development','Erlang is fastest in network communication',"http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png") ,
-      new Article('Elixir development','Elixer is written as wrapper over erlang',"http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png") ,
-      new Article('Phoenix development','Phoenix is framework of angular',"http://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png") ,
-      new Article('Angular JS development','Dynamic web development',"http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png") ,
-   ]
+  constructor(private _articleService:ArticleService){
+    this.articles = this._articleService.getArticles()
   }
 }
