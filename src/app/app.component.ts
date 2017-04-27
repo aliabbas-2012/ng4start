@@ -3,6 +3,10 @@ import { Component,Input } from '@angular/core';
 class Article {  
   //no need to define like javastyle , Typescript will handle
   constructor(public title: string,public description: string){}
+
+  public date():Date {
+    return new Date()
+  }
 }
 
 //article component
@@ -20,7 +24,7 @@ class Article {
         Voting and votes will go here
       </div>
       <div class="meta date">
-        Today
+        {{article.date() | date:'medium'}}
       </div>
       <div class="meta description">
         {{article.description}}
