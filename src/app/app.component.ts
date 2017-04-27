@@ -9,9 +9,30 @@ class Article {
 @Component({
   selector: 'app-article',
   template: `
-    <div>
-      <h2>{{article.title}}</h2>
-      <p>{{article.description}}</p>
+    <div class='image'>
+      <img src="http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png" />
+    </div>
+    <div class='content'>
+      <div class="header">
+        {{article.title}}
+      </div>
+      <div class="meta">
+        Voting and votes will go here
+      </div>
+      <div class="meta date">
+        Today
+      </div>
+      <div class="meta description">
+        {{article.description}}
+      </div>
+      <div class="extra">
+        <a 
+          href="#" target="_blank" 
+          class='ui right floated button primary'>
+            Read more
+          <i class="right chevron icon"></i>
+        </a>
+      </div>
     </div>
   `
 })
@@ -39,11 +60,11 @@ export class SideBarComponent {
   selector: 'app-root',
   // templateUrl: './app.component.html',
   template: `
-    <app-side-bar></app-side-bar>
-    <div id="container">
-      <div id="content" *ngIf="articles && articles.length">
-        <app-article  *ngFor="let article of articles" [article]="article" ></app-article>
-        
+    
+    <div clss="ui container">
+      <app-side-bar></app-side-bar>
+      <div clss="ui divided items" *ngIf="articles && articles.length">
+        <app-article class='item'  *ngFor="let article of articles" [article]="article" ></app-article>
       </div>
     </div>
   `
