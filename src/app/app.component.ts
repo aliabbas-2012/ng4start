@@ -4,7 +4,10 @@ import { Component,Input } from '@angular/core';
 @Component({
   selector: 'app-article',
   template: `
-    <div>{{article.title}}</div>
+    <div>
+      <h2>{{article.title}}</h2>
+      <p>{{article.discription}}</p>
+    </div>
   `
 })
 
@@ -32,8 +35,8 @@ export class SideBarComponent {
   template: `
     <app-side-bar></app-side-bar>
     <div id="container">
-      <div id="content">
-        <app-article *ngFor="let article of articles" [article]="article" ></app-article>
+      <div id="content" *ngIf="articles && articles.length">
+        <app-article  *ngFor="let article of articles" [article]="article" ></app-article>
         
       </div>
     </div>
