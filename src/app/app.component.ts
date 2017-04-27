@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 //article component
 @Component({
   selector: 'app-article',
   template: `
-    <div>Article Goes here</div>
+    <div>{{article.title}}</div>
   `
 })
 
 export class ArticleComponent {
-
+  @Input() article: Object;
 }
 
 //another component namely sidebar
@@ -33,9 +33,9 @@ export class SideBarComponent {
     <app-side-bar></app-side-bar>
     <div id="container">
       <div id="content">
-        <app-article></app-article>
-        <app-article></app-article>
-        <app-article></app-article>
+        <app-article [article]="article"></app-article>
+        <app-article [article]="article"></app-article>
+        <app-article [article]="article"></app-article>
       </div>
     </div>
   `
@@ -43,4 +43,12 @@ export class SideBarComponent {
 })
 export class AppComponent {
   title = 'app works!';
+  article: Object;
+  
+  constructor(){
+    this.article = {
+      title: 'Erlang development',
+      discription: 'Erlang is fastest in network communication'
+    }
+  }
 }
