@@ -33,22 +33,33 @@ export class SideBarComponent {
     <app-side-bar></app-side-bar>
     <div id="container">
       <div id="content">
-        <app-article [article]="article"></app-article>
-        <app-article [article]="article"></app-article>
-        <app-article [article]="article"></app-article>
+        <app-article *ngFor="let article of articles" [article]="article" ></app-article>
+        
       </div>
     </div>
   `
   // styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
-  article: Object;
+  title = 'Article View application!';
+  articles: Object[];
   
   constructor(){
-    this.article = {
+    this.articles = [{
       title: 'Erlang development',
       discription: 'Erlang is fastest in network communication'
-    }
+    },
+    {
+      title: 'Elixir development',
+      discription: 'Elixer is written as wrapper over erlang'
+    },
+    {
+      title: 'Phoenix development',
+      discription: 'Phoenix is framework of angular'
+    },
+    {
+      title: 'Angular JS development',
+      discription: 'Dynamic web development'
+    }]
   }
 }
