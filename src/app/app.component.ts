@@ -9,6 +9,14 @@ class Article {
   public date():Date {
     return new Date()
   }
+
+  public voteUp():void{
+    this.votes +=1
+  }
+
+  public voteDown():void{
+    this.votes -=1
+  }
 }
 
 //article component
@@ -66,9 +74,12 @@ export class ArticleComponent {
 
   upvote():void{
     console.log('---up vote--');
+    this.article.voteUp()
+    
   }
   downvote():void{
     console.log('---down vote--');
+    this.article.voteDown()
   }
 }
 
