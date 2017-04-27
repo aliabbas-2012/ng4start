@@ -2,7 +2,9 @@ import { Component,Input } from '@angular/core';
 
 class Article {  
   //no need to define like javastyle , Typescript will handle
-  constructor(public title: string,public description: string){}
+  constructor(public title: string,public description: string,public votes?:number){
+    this.votes = votes || 0
+  }
 
   public date():Date {
     return new Date()
@@ -16,20 +18,37 @@ class Article {
     <div class='image'>
       <img src="http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png" />
     </div>
-    <div class='content'>
-      <div class="header">
+    <div class='ui content'>
+      <div class="ui header">
         {{article.title}}
       </div>
-      <div class="meta">
-        Voting and votes will go here
+      <div class="ui meta">
+        <span class="ui blue small label">
+          <i class="heart icon"></i>
+          <div class="ui detail">
+            {{article.votes}}
+          </div>
+        </span>
+      
+        <span class="ui right floated">
+          <a (click)="upvote()" class="ui small label">
+            <i class="arrow up icon"></i>
+            Upvote
+          </a>
+          <a (click)="downvote()" class="ui small label">
+            <i class="arrow down icon"></i>
+            Downvote
+          </a>
+        </span>
       </div>
-      <div class="meta date">
+
+      <div class="ui meta date">
         {{article.date() | date:'medium'}}
       </div>
-      <div class="meta description">
+      <div class="ui meta description">
         {{article.description}}
       </div>
-      <div class="extra">
+      <div class="ui extra">
         <a 
           href="#" target="_blank" 
           class='ui right floated button primary'>
@@ -44,6 +63,13 @@ class Article {
 
 export class ArticleComponent {
   @Input() article: Article;
+
+  upvote():void{
+    console.log('---up vote--');
+  }
+  downvote():void{
+    console.log('---down vote--');
+  }
 }
 
 //another component namely sidebar
@@ -65,7 +91,7 @@ export class SideBarComponent {
   // templateUrl: './app.component.html',
   template: `
     
-    <div clss="ui container">
+    <div clss="ui main text container">
       <app-side-bar></app-side-bar>
       <div clss="ui divided items" *ngIf="articles && articles.length">
         <app-article class='item'  *ngFor="let article of articles" [article]="article" ></app-article>
