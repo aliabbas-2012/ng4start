@@ -3,12 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent,SideBarComponent,ArticleComponent } from './app.component';
+import { AppComponent } from './app.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ArticleComponent } from './article/article.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SideBarComponent,
+    SidebarComponent,
+    ArticleComponent,
+    SidebarComponent,
     ArticleComponent
   ],
   imports: [
