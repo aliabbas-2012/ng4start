@@ -14,6 +14,12 @@ export class AppComponent {
   articles: Article[];
   
   constructor(private _articleService:ArticleService){
-    this.articles = this._articleService.getArticles()
+      _articleService.getArticles().then(articles=>this.articles = articles)
+      //above is equal to in js
+      /*
+      _articleService.getArticles().then(function(articles){
+        this.articles = articles;
+      })
+      */
   }
 }
