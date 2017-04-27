@@ -1,6 +1,4 @@
- <div clss="ui main text container">
+ <div class="ui container">
     <app-side-bar></app-side-bar>
-    <div clss="ui divided items" *ngIf="articles && articles.length">
-      <app-article class='item'  *ngFor="let article of articles" [article]="article" ></app-article>
-    </div>
+    <app-article-list [articles]="articles"></app-article-list>
 </div>
