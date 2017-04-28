@@ -11,21 +11,35 @@ export class ArticleListComponent implements OnInit {
   articles: Article[];
   
   constructor(private _articleService:ArticleService) { 
-      _articleService.getArticles().then(articles=>this.articles = articles)
+     
+  }
 
-       //above is equal to in js
-      /*
-      _articleService.getArticles().then(function(articles){
-        this.articles = articles;
-      })
-      */
+  ngOnInit() {
+    this.setArticlesUsingPromise()
+  }
 
-      _articleService.getArticles().catch((err) => {
+  private setArticlesUsingPromise():void{
+      this._articleService.getArticles().then(articles=>this.articles = articles)
+      // //above is equal to in js
+      // /*
+      //   this._articleService.getArticles().then(function(articles){
+      //     this.articles = articles;
+      //   })
+      // */
+      //====call back error
+      this._articleService.getArticles().catch((err) => {
           console.log('I get called:', err.message); // I get called: 'Something awful happened'
       });
   }
 
-  ngOnInit() {
+  private setArticlesUsingObservables():void{
+
+     this._articleService.getArticlesUsingObs().subscribe(
+         res => {this.articles = res},
+            err => {
+                console.log('I get called:', err.message)
+            }
+      )
   }
 
 }
