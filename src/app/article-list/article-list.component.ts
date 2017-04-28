@@ -16,6 +16,8 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit() {
     this.setArticlesUsingPromise()
+    let test = this._articleService.getArticlesOverApi();
+    console.log(test)
   }
 
   private setArticlesUsingPromise():void{

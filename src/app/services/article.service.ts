@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
+import {Http,URLSearchParams} from '@angular/http'
+
 import {Article} from './../article'  
 import { Observable }     from 'rxjs/Observable';
+
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+
+const apiUrl = "https://newsapi.org"
+const apiKey = "3b2b1a59a3f6448fb8ecbc5f19c49789"
 
 @Injectable()
 export class ArticleService {
   private  articles: Article[]
-  constructor() {
+  constructor(private _http:Http) {
      this.articles = [
           //defining instances in array objects
           new Article('Erlang development','Erlang is fastest in network communication',"http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png") ,
@@ -14,6 +22,27 @@ export class ArticleService {
           new Article('Angular JS development','Dynamic web development',"http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png") ,
       ]
    }
+
+  public getArticlesOverApi():Promise<Article[]> {
+      let params = new URLSearchParams()
+      params.set('apiKey',apiKey)
+      params.set('source','reddit-r-all')
+      return this._http.get(`${apiUrl}/v1/articles`,{'search': params}).toPromise()
+        .then(resp=>{
+          return resp.json()
+        }).then(json=>{
+            console.log("json=>",json)
+            return json.articles
+        }).then(articles=>{
+           return articles.map(article=>{
+              return new Article(article.title,article.description,article.urlToImage)
+           })
+        })
+        .catch(err=>{
+            console.log("error in fetching data",err)
+        })
+
+  } 
 
   //using Promise
   public getArticles():Promise<Article[]> {
