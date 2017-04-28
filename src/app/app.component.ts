@@ -25,7 +25,7 @@ export class AppComponent {
       _articleService.getArticles().catch((err) => {
           console.log('I get called:', err.message); // I get called: 'Something awful happened'
       });
-      
+       
      
   }
 }
