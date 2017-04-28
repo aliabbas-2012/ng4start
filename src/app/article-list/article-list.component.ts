@@ -15,9 +15,15 @@ export class ArticleListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setArticlesUsingPromise()
-    let test = this._articleService.getArticlesOverApi();
-    console.log(test)
+    this.setArticlesUsingApiPromise()
+  }
+
+   private setArticlesUsingApiPromise():void{
+      this._articleService.getArticlesOverApi().then(articles=>this.articles = articles)
+      //====call back error
+      this._articleService.getArticlesOverApi().catch((err) => {
+          console.log('I get called:', err.message); // I get called: 'Something awful happened'
+      });
   }
 
   private setArticlesUsingPromise():void{

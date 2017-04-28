@@ -27,16 +27,29 @@ export class ArticleService {
       let params = new URLSearchParams()
       params.set('apiKey',apiKey)
       params.set('source','reddit-r-all')
+      
+      //this will make the url like this
+      /** 
+          https://newsapi.org/apiKey=3b2b1a59a3f6448fb8ecbc5f19c49789&source=reddit-r-all 
+      **/
+
       return this._http.get(`${apiUrl}/v1/articles`,{'search': params}).toPromise()
-        .then(resp=>{
-          return resp.json()
-        }).then(json=>{
+        .then(resp=>resp.json())
+        .then(json=>{
             console.log("json=>",json)
             return json.articles
         }).then(articles=>{
+           //old method
+           /*
+            return articles.map(article=>{
+                return new Article(article.title,article.description,article.urlToImage)
+            })
+           */
+           //new method
            return articles.map(article=>{
-              return new Article(article.title,article.description,article.urlToImage)
-           })
+                return Article.getFromJSON(article)
+            })
+
         })
         .catch(err=>{
             console.log("error in fetching data",err)
