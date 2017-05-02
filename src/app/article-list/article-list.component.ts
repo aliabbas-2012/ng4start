@@ -1,4 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import {Article} from '../article'
 import {ArticleService} from './../services/article.service'
 
@@ -8,14 +9,18 @@ import {ArticleService} from './../services/article.service'
   styleUrls: ['./article-list.component.css']
 })
 export class ArticleListComponent implements OnInit {
-  articles: Article[];
+
+  articles: Article[]; // for promise 
+  public articles_obs: Observable<Article[]>;
   
   constructor(private _articleService:ArticleService) { 
-     
+    this.articles_obs = _articleService.articlesOb;
   }
 
   ngOnInit() {
-    this.setArticlesUsingApiPromise()
+    //  this.setArticlesUsingApiPromise()
+
+    this._articleService.setArtcilesUsingObServeAble();
   }
 
    private setArticlesUsingApiPromise():void{
