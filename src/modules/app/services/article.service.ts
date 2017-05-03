@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
-import { environment } from './../../environments/environment'
+import { environment } from './../../../environments/environment'
 
 @Injectable()
 export class ArticleService {
@@ -90,13 +90,17 @@ export class ArticleService {
         // update our subject
 
         this._makeHttpRequest('/v1/articles', 'reddit-r-all')
-            .map(json => json.artciles)
-            .subscribe(articlesJSON => {
-                console.log(articlesJSON);
+            // .map(json => {
+
+            // })
+            .subscribe(resp => {
+                let articlesJSON =  resp.json().articles;
+               
                 const articles = articlesJSON
                     .map(articlejson => Article.getFromJSON(articlejson));
-
+                 
                 this._articles.next(articles);
+                this._articles.complete();
             })
     }
 
@@ -113,14 +117,15 @@ export class ArticleService {
        console.log(params);
        console.log(`${environment.apiUrl}${path}`)
 
-        let p = this._http.get('https://newsapi.org/v1/articles/?apiKey=3b2b1a59a3f6448fb8ecbc5f19c49789&source=reddit-r-all')
-            .map(resp => {
-                console.log(resp);
-               return  resp.json()
-            });
-            console.log(p);
+        // let p = this._http.get(`${environment.apiUrl}${path}`, { 'search': params })
+        //     .map(resp => {
+        //         console.log('--response--')
+        //         console.log(resp);
+        //         //return  resp.json()
+        //     });
+        //     console.log(p);
         return this._http.get(`${environment.apiUrl}${path}`, { 'search': params })
-            .map(resp => resp.json());
+
 
 
     }

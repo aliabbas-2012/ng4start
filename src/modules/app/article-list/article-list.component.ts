@@ -11,10 +11,12 @@ import {ArticleService} from './../services/article.service'
 export class ArticleListComponent implements OnInit {
 
   articles: Article[]; // for promise 
-  public articles_obs: Observable<Article[]>;
+  articles_obs: Observable<Article[]>;
   
   constructor(private _articleService:ArticleService) { 
     this.articles_obs = _articleService.articlesOb;
+    console.log("--constructore--");
+    console.log(this.articles_obs)
   }
 
   ngOnInit() {

@@ -9,6 +9,14 @@ import { ArticleComponent } from './article/article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleService } from './services/article.service';
 
+import { HighlightDirective } from './highlight.directive';
+
+/* Contact Imports */
+import { ContactModule }      from '.././contact/contact.module';
+
+/* Routing Module */
+import { AppRoutingModule } from './app-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,12 +24,15 @@ import { ArticleService } from './services/article.service';
     ArticleComponent,
     SidebarComponent,
     ArticleComponent,
-    ArticleListComponent
+    ArticleListComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ContactModule,
+    AppRoutingModule
   ],
   providers: [ArticleService],
   bootstrap: [AppComponent]
